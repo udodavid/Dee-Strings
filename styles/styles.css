@@ -1,0 +1,227 @@
+/* body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .fancy-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom Pattern Background *
+        .music-pattern {
+            background-color: #1e3a8a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2393c5fd' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        } */
+
+/* ================================
+   BASE STYLES
+================================ */
+:root {
+    --primary-blue: #1e3a8a;
+    --secondary-blue: #2563eb;
+    --accent-yellow: #facc15;
+    --accent-orange: #f97316;
+    --dark-bg: #020617;
+    --dark-card: #020617;
+    --light-bg: #f3f4f6;
+    --text-dark: #1f2933;
+    --text-light: #e5e7eb;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.fancy-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* ================================
+   BACKGROUND PATTERN
+================================ */
+.music-pattern {
+    background-color: var(--primary-blue);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%2393c5fd' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ================================
+   CONTAINER & CARD STYLES
+================================ */
+.card-bg {
+    background-color: #ffffff;
+}
+
+.shadow-soft {
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+/* ================================
+   IMAGES
+================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ================================
+   FLOATING ENQUIRY MENU
+================================ */
+.enquiry-menu {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s ease;
+}
+
+.enquiry-menu.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+button {
+    font-family: 'Montserrat', sans-serif;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* ================================
+   DARK MODE (READABLE & HIGH CONTRAST)
+================================ */
+.dark body {
+    background-color: #020617;
+    color: #e5e7eb;
+}
+
+/* Force readable text */
+.dark p,
+.dark span,
+.dark li,
+.dark a,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+    color: #242425 !important;
+}
+
+/* Muted text */
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700 {
+    color: #9ca3af !important;
+}
+
+/* Cards & sections */
+.dark .card-bg,
+.dark .bg-white {
+    background-color: #020617 !important;
+}
+
+/* Borders */
+.dark .border,
+.dark .border-gray-100,
+.dark .border-gray-200 {
+    border-color: #1e293b !important;
+}
+
+/* Icons */
+.dark i {
+    color: #facc15;
+}
+
+/* Links */
+.dark a:hover {
+    color: #fde68a;
+}
+
+/* Shadows */
+.dark .shadow-soft,
+.dark .shadow-2xl,
+.dark .shadow-xl {
+    box-shadow: 0 15px 40px rgba(0,0,0,0.75);
+}
+
+/* Image overlays */
+.dark .bg-black {
+    background-color: rgba(0,0,0,0.55);
+}
+
+
+/* ================================
+   ANIMATIONS
+================================ */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ================================
+   RESPONSIVE TWEAKS
+================================ */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.4rem;
+    }
+
+    h2 {
+        font-size: 1.9rem;
+    }
+
+    .music-pattern {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+}
