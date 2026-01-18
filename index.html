@@ -18,12 +18,64 @@
         <div class="music-pattern text-white p-8 md:p-10 text-center relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500"></div>
             
-            <div class="relative z-10">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-2">
-                    DEE <span class="text-yellow-400">STRINGS</span>
-                </h1>
-                <p class="text-blue-200 text-lg md:text-xl uppercase tracking-widest font-semibold">Music Academy & Services</p>
+            <header class="bg-blue-900 text-white sticky top-0 z-50">
+                <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+                    <h1 class="text-2xl font-bold">Deex Strings</h1>
+
+                    <!-- Desktop Menu -->
+                    <nav class="hidden md:flex gap-8 font-semibold">
+                        <a href="index.html" class="hover:text-yellow-400">Home</a>
+                        <a href="about.html" class="hover:text-yellow-400">About</a>
+                        <a href="apply.html" class="hover:text-yellow-400">Online Classes</a>
+                        <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+                    </nav>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="menuBtn" class="md:hidden text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Dropdown -->
+                <div id="mobileMenu" class="hidden bg-blue-800 md:hidden">
+                    <a href="index.html" class="block px-6 py-3 border-b border-blue-700">Home</a>
+                    <a href="about.html" class="block px-6 py-3 border-b border-blue-700">About</a>
+                    <a href="apply.html" class="block px-6 py-3 border-b border-blue-700">Online Classes</a>
+                    <a href="contact.html" class="block px-6 py-3">Contact</a>
+                </div>
+            </header>
+
+            <!-- Slideshow Section -->
+            <section class="slideshow-container">
+
+            <div class="slide fade">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Music Training">
+                <div class="caption">Professional Music Training</div>
             </div>
+
+            <div class="slide fade">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d" alt="Instrument Practice">
+                <div class="caption">Learn Instruments with Experts</div>
+            </div>
+
+            <div class="slide fade">
+                <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76" alt="Live Performance">
+                <div class="caption">Performance & Live Events</div>
+            </div>
+
+            <!-- Navigation -->
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+
+            <!-- Dots -->
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            </section>
             
             <!-- Decorative circle behind text -->
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-800 rounded-full opacity-50 blur-3xl z-0"></div>
@@ -174,7 +226,7 @@
             <i class="fab fa-telegram text-2xl"></i> Telegram
         </a>
 
-        <a href="https://instagram.com/yourusername" target="_blank"
+        <a href="https://instagram.com/deestringsmusichub" target="_blank"
            class="flex items-center gap-3 text-pink-500 hover:bg-pink-50 p-2 rounded-lg transition">
             <i class="fab fa-instagram text-2xl"></i> Instagram
         </a>
