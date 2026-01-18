@@ -33,28 +33,6 @@
     });
 })();
 
-// Form
-document.addEventListener("DOMContentLoaded", () => {
-
-  /* ======================
-     MOBILE MENU
-  ====================== */
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  if (menuBtn) {
-    menuBtn.onclick = () => mobileMenu.classList.toggle("hidden");
-  }
-
-  /* ======================
-     ACTIVE NAV LINK
-  ====================== */
-  document.querySelectorAll(".nav-link").forEach(link => {
-    if (link.href === window.location.href) {
-      link.classList.add("text-yellow-400");
-    }
-  });
-
 //   Slideshow
 let slideIndex = 0;
 const slides = document.querySelectorAll(".slide");
@@ -97,58 +75,174 @@ setInterval(nextSlide, 5000);
 showSlide(slideIndex);
 
 
-/* ===============================
-   ONLINE CLASSES FORM HANDLER
-   (Netlify-compatible)
-================================ */
-const form = document.querySelector("form[data-form='online-classes']");
-
-if (form) {
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const status = document.getElementById("formStatus");
-        status.textContent = "Submitting...";
-        status.className = "text-blue-600 mt-4";
-
-        const formData = new FormData(form);
-
-        try {
-            const response = await fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            });
-
-            if (response.ok) {
-                form.reset();
-                status.textContent = "✅ Application submitted successfully!";
-                status.className = "text-green-600 mt-4";
-            } else {
-                throw new Error("Submission failed");
-            }
-        } catch (error) {
-            status.textContent = "❌ Something went wrong. Please try again.";
-            status.className = "text-red-600 mt-4";
-        }
-    });
+  // Select the form
+  // Form
+// Modal functions
+function showModal(id) {
+    const modal = document.getElementById(id);
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
 }
 
-  /* ======================
-     DARK MODE
-  ====================== */
-  const toggle = document.getElementById("darkToggle");
-  if (toggle) {
-    toggle.onclick = () => {
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem(
-        "theme",
-        document.documentElement.classList.contains("dark") ? "dark" : "light"
-      );
-    };
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+}
+
+  // Save form data locally and redirect
+  function handleFormSubmission(formId) {
+      const form = document.getElementById(formId);
+
+      if (!form) return;
+
+      form.addEventListener('submit', function(e) {
+          e.preventDefault(); // prevent default submit
+
+          // Collect form data
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+
+          // Save data to localStorage
+          localStorage.setItem('onlineFormData', JSON.stringify(data));
+
+          // Optional: log for debugging
+          console.log('Form data saved locally:', data);
+
+          // Redirect to success page
+          window.location.href = 'success.html';
+      });
   }
 
-  if (localStorage.getItem("theme") === "dark") {
-    document.documentElement.classList.add("dark");
-  }
+  // Initialize the form handler
+  handleFormSubmission('onlineClassesForm');
+
+
+
+
+// // Form
+// document.addEventListener("DOMContentLoaded", () => {
+
+//   /* ======================
+//      MOBILE MENU
+//   ====================== */
+//   const menuBtn = document.getElementById("menuBtn");
+//   const mobileMenu = document.getElementById("mobileMenu");
+
+//   if (menuBtn) {
+//     menuBtn.onclick = () => mobileMenu.classList.toggle("hidden");
+//   }
+
+//   /* ======================
+//      ACTIVE NAV LINK
+//   ====================== */
+//   document.querySelectorAll(".nav-link").forEach(link => {
+//     if (link.href === window.location.href) {
+//       link.classList.add("text-yellow-400");
+//     }
+//   });
+
+
+// // Form
+// // document.addEventListener("DOMContentLoaded", () => {
+// //   const form = document.querySelector("form[name='online-classes']");
+// //   const status = document.getElementById("formStatus");
+
+// //   if (!form) return;
+
+// //   form.addEventListener("submit", () => {
+// //     status.textContent = "Submitting...";
+// //     status.style.color = "blue";
+// //   });
+// // });
+
+
+// /* ===============================
+//    ONLINE CLASSES FORM HANDLER
+//    (Netlify-compatible)
+// ================================ */
+// // const form = document.querySelector("form[data-form='online-classes']");
+
+// // if (form) {
+// //     form.addEventListener("submit", async (e) => {
+// //         e.preventDefault();
+
+// //         const status = document.getElementById("formStatus");
+// //         status.textContent = "Submitting...";
+// //         status.className = "text-blue-600 mt-4";
+
+// //         const formData = new FormData(form);
+
+// //         try {
+// //             const response = await fetch("/", {
+// //                 method: "POST",
+// //                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
+// //                 body: new URLSearchParams(formData).toString()
+// //             });
+
+// //             if (response.ok) {
+// //                 form.reset();
+// //                 // Optional: show success message before redirect
+// //                 status.textContent = "✅ Application submitted successfully!";
+// //                 status.className = "text-green-600 mt-4";
+
+// //                 // Redirect to success.html after a short delay (optional)
+// //                 setTimeout(() => {
+// //                     window.location.href = "success.html";
+// //                 }, 1000); // 1 second delay
+// //             } else {
+// //                 throw new Error("Submission failed");
+// //             }
+// //         } catch (error) {
+// //             status.textContent = "❌ Something went wrong. Please try again.";
+// //             status.className = "text-red-600 mt-4";
+// //         }
+// //     });
+// // }
+
+// form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+
+//     const formData = new FormData(form);
+//     const data = Object.fromEntries(formData.entries());
+
+//     // Save to localStorage
+//     localStorage.setItem("onlineFormData", JSON.stringify(data));
+
+//     // Redirect
+//     window.location.href = "success.html";
+// });
+
+
+
+//   /* ======================
+//      DARK MODE
+//   ====================== */
+//   const toggle = document.getElementById("darkToggle");
+//   if (toggle) {
+//     toggle.onclick = () => {
+//       document.documentElement.classList.toggle("dark");
+//       localStorage.setItem(
+//         "theme",
+//         document.documentElement.classList.contains("dark") ? "dark" : "light"
+//       );
+//     };
+//   }
+
+//   if (localStorage.getItem("theme") === "dark") {
+//     document.documentElement.classList.add("dark");
+//   }
+// });
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // Save to localStorage
+    localStorage.setItem("onlineFormData", JSON.stringify(data));
+
+    // Redirect
+    window.location.href = "success.html";
 });
