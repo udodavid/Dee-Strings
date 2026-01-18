@@ -58,21 +58,38 @@ hambutton.addEventListener('click', () => {
     hambutton.classList.toggle('show')
 });
 
+const handleSubmit = event => {
+  event.preventDefault();
+
+  const myForm = event.target;
+  const formData = new FormData(myForm);
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  })
+    .then(() => alert("Application sent"))
+    .catch(error => alert(error));
+};
+
+document.querySelector("form").addEventListener("submit", handleSubmit);
+
 // Details
-const params = new URLSearchParams(window.location.search);
-    document.getElementById('form-data').innerHTML = `
-      <li>First Name: ${params.get('first_name')}</li>
-      <li>Last Name: ${params.get('last_name')}</li>
-      <li>Organizational Title: ${params.get('organization_title')}</li>
-      <li>Email: ${params.get('email')}</li>
-      <li>Phone: ${params.get('phone')}</li>
-      <li>Business Name: ${params.get('organization')}</li>
-      <li>Membership Level: ${params.get('membership_level')}</li>
-      <li>Date Submitted: ${params.get('timestamp')}</li>
-    `;
+// const params = new URLSearchParams(window.location.search);
+//     document.getElementById('form-data').innerHTML = `
+//       <li>First Name: ${params.get('first_name')}</li>
+//       <li>Last Name: ${params.get('last_name')}</li>
+//       <li>Organizational Title: ${params.get('organization_title')}</li>
+//       <li>Email: ${params.get('email')}</li>
+//       <li>Phone: ${params.get('phone')}</li>
+//       <li>Business Name: ${params.get('organization')}</li>
+//       <li>Membership Level: ${params.get('membership_level')}</li>
+//       <li>Date Submitted: ${params.get('timestamp')}</li>
+//     `;
 
-    // Get the current year and update the footer
-document.getElementById('currentyear').textContent = new Date().getFullYear();
+//     // Get the current year and update the footer
+// document.getElementById('currentyear').textContent = new Date().getFullYear();
 
-// Get the last modified date of the document and update the footer
-document.getElementById('lastModified').textContent = "Last Modified: " + document.lastModified;
+// // Get the last modified date of the document and update the footer
+// document.getElementById('lastModified').textContent = "Last Modified: " + document.lastModified;

@@ -118,87 +118,115 @@ function closeModal(id) {
   handleFormSubmission('onlineClassesForm');
 
 
+// Form
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ======================
+     MOBILE MENU
+  ====================== */
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuBtn) {
+    menuBtn.onclick = () => mobileMenu.classList.toggle("hidden");
+  }
+
+  /* ======================
+     ACTIVE NAV LINK
+  ====================== */
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add("text-yellow-400");
+    }
+  });
 
 
-// // Form
-// document.addEventListener("DOMContentLoaded", () => {
+// Form
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form[name='online-classes']");
+  const status = document.getElementById("formStatus");
 
-//   /* ======================
-//      MOBILE MENU
-//   ====================== */
-//   const menuBtn = document.getElementById("menuBtn");
-//   const mobileMenu = document.getElementById("mobileMenu");
+  if (!form) return;
 
-//   if (menuBtn) {
-//     menuBtn.onclick = () => mobileMenu.classList.toggle("hidden");
-//   }
-
-//   /* ======================
-//      ACTIVE NAV LINK
-//   ====================== */
-//   document.querySelectorAll(".nav-link").forEach(link => {
-//     if (link.href === window.location.href) {
-//       link.classList.add("text-yellow-400");
-//     }
-//   });
+  form.addEventListener("submit", () => {
+    status.textContent = "Submitting...";
+    status.style.color = "blue";
+  });
+});
 
 
-// // Form
-// // document.addEventListener("DOMContentLoaded", () => {
-// //   const form = document.querySelector("form[name='online-classes']");
-// //   const status = document.getElementById("formStatus");
+/* ===============================
+   ONLINE CLASSES FORM HANDLER
+   (Netlify-compatible)
+================================ */
+const handleSubmit = event => {
+  event.preventDefault();
 
-// //   if (!form) return;
+  const myForm = event.target;
+  const formData = new FormData(myForm);
 
-// //   form.addEventListener("submit", () => {
-// //     status.textContent = "Submitting...";
-// //     status.style.color = "blue";
-// //   });
-// // });
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  })
+    .then(() => navigate("/thank-you/"))
+    .catch(error => alert(error));
+};
 
+return (
+  <form
+    data-netlify="true"
+    name="pizzaOrder"
+    method="post"
+    onSubmit={handleSubmit}
+  >
+    <input type="hidden" name="form-name" value="pizzaOrder" />
+    <label>
+      What order did the pizza give to the pineapple?
+      <input name="order" type="text" onChange={handleChange} />
+    </label>
+    <input type="submit" />
+  </form>
+);
+// const form = document.querySelector("form[data-form='online-classes']");
 
-// /* ===============================
-//    ONLINE CLASSES FORM HANDLER
-//    (Netlify-compatible)
-// ================================ */
-// // const form = document.querySelector("form[data-form='online-classes']");
+// if (form) {
+//     form.addEventListener("submit", async (e) => {
+//         e.preventDefault();
 
-// // if (form) {
-// //     form.addEventListener("submit", async (e) => {
-// //         e.preventDefault();
+//         const status = document.getElementById("formStatus");
+//         status.textContent = "Submitting...";
+//         status.className = "text-blue-600 mt-4";
 
-// //         const status = document.getElementById("formStatus");
-// //         status.textContent = "Submitting...";
-// //         status.className = "text-blue-600 mt-4";
+//         const formData = new FormData(form);
 
-// //         const formData = new FormData(form);
+//         try {
+//             const response = await fetch("/", {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
+//                 body: new URLSearchParams(formData).toString()
+//             });
 
-// //         try {
-// //             const response = await fetch("/", {
-// //                 method: "POST",
-// //                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-// //                 body: new URLSearchParams(formData).toString()
-// //             });
+//             if (response.ok) {
+//                 form.reset();
+//                 // Optional: show success message before redirect
+//                 status.textContent = "✅ Application submitted successfully!";
+//                 status.className = "text-green-600 mt-4";
 
-// //             if (response.ok) {
-// //                 form.reset();
-// //                 // Optional: show success message before redirect
-// //                 status.textContent = "✅ Application submitted successfully!";
-// //                 status.className = "text-green-600 mt-4";
+//                 // Redirect to success.html after a short delay (optional)
+//                 setTimeout(() => {
+//                     window.location.href = "success.html";
+//                 }, 1000); // 1 second delay
+//             } else {
+//                 throw new Error("Submission failed");
+//             }
+//         } catch (error) {
+//             status.textContent = "❌ Something went wrong. Please try again.";
+//             status.className = "text-red-600 mt-4";
+//         }
+    });
 
-// //                 // Redirect to success.html after a short delay (optional)
-// //                 setTimeout(() => {
-// //                     window.location.href = "success.html";
-// //                 }, 1000); // 1 second delay
-// //             } else {
-// //                 throw new Error("Submission failed");
-// //             }
-// //         } catch (error) {
-// //             status.textContent = "❌ Something went wrong. Please try again.";
-// //             status.className = "text-red-600 mt-4";
-// //         }
-// //     });
-// // }
 
 // form.addEventListener("submit", async (e) => {
 //     e.preventDefault();
