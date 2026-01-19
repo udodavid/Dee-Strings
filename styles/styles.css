@@ -53,12 +53,12 @@ h1, h2, h3, h4 {
     letter-spacing: -0.02em;
 }
 
-.site-header {
+/* .site-header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-}
+} */
 
 .fancy-font {
     font-family: 'Playfair Display', serif;
@@ -101,6 +101,10 @@ h1, h2, h3, h4 {
   padding: 15px 25px;
   font-size: clamp(1rem, 2.5vw, 2rem);
   border-radius: 8px;
+}
+
+#form-data {
+    margin-top: 25PX;
 }
 
 /* Buttons */

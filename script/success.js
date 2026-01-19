@@ -33,47 +33,70 @@
     });
 })();
 
-// Get current page URL
-const currentPage = window.location.pathname;
+// // Get current page URL
+// const currentPage = window.location.pathname;
 
-//All navigation links
-const navLinks = document.querySelectorAll('.nav-links a');
+// //All navigation links
+// const navLinks = document.querySelectorAll('.nav-links a');
 
-navLinks.forEach(link => {
-    if (currentPage === '/' || currentPage.endsWith('index.html')){
-        if (link.getAttribute('href').includes('index.html')){
-            link.classList.add('active');
-        }
-    }
-    else if (link.href.includes(currentPage)) {
-        link.classList.add('active');
-    }
-});
+// navLinks.forEach(link => {
+//     if (currentPage === '/' || currentPage.endsWith('index.html')){
+//         if (link.getAttribute('href').includes('index.html')){
+//             link.classList.add('active');
+//         }
+//     }
+//     else if (link.href.includes(currentPage)) {
+//         link.classList.add('active');
+//     }
+// });
 
-const mainnav = document.querySelector('.navigation')
-const hambutton = document.querySelector('#menu');
+// const mainnav = document.querySelector('.navigation')
+// const hambutton = document.querySelector('#menu');
 
-hambutton.addEventListener('click', () => {
-    mainnav.classList.toggle('show');
-    hambutton.classList.toggle('show')
-});
+// hambutton.addEventListener('click', () => {
+//     mainnav.classList.toggle('show');
+//     hambutton.classList.toggle('show')
+// });
 
-const handleSubmit = event => {
-  event.preventDefault();
+// const handleSubmit = event => {
+//   event.preventDefault();
 
-  const myForm = event.target;
-  const formData = new FormData(myForm);
+//   const myForm = event.target;
+//   const formData = new FormData(myForm);
 
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString()
-  })
-    .then(() => alert("Application sent"))
-    .catch(error => alert(error));
-};
+//   fetch("/", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/x-www-form-urlencoded" },
+//     body: new URLSearchParams(formData).toString()
+//   })
+//     .then(() => alert("Application sent"))
+//     .catch(error => alert(error));
+// };
 
-document.querySelector("form").addEventListener("submit", handleSubmit);
+// document.querySelector("form").addEventListener("submit", handleSubmit);
+
+const data = JSON.parse(localStorage.getItem("onlineClasses")) || [];
+    const latest = data[data.length - 1];
+
+    document.getElementById("result").innerHTML = `
+      <p><strong>Name:</strong> ${latest.first_name}</p>
+      <p><strong>Email:</strong> ${latest.email}</p>
+      <p><strong>Phone:</strong> ${latest.phone}</p>
+      <p><strong>Instrument:</strong> ${latest.membership_level}</p>
+      <p><strong>Message:</strong> ${latest.message}</p>
+    `;
+    
+// Details
+const params = new URLSearchParams(window.location.search);
+    document.getElementById('form-data').innerHTML = `
+        <li>Date Submitted: ${params.get('timestamp')}</li>
+    `;
+
+    // Get the current year and update the footer
+document.getElementById('currentyear').textContent = new Date().getFullYear();
+
+// Get the last modified date of the document and update the footer
+document.getElementById('lastModified').textContent = "Last Modified: " + document.lastModified;
 
 // Details
 // const params = new URLSearchParams(window.location.search);

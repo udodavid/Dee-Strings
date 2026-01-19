@@ -74,6 +74,11 @@ setInterval(nextSlide, 5000);
 /* Init */
 showSlide(slideIndex);
 
+// Get the current year and update the footer
+document.getElementById('currentyear').textContent = new Date().getFullYear();
+
+// Get the last modified date of the document and update the footer
+document.getElementById('lastModified').textContent = "Last Modified: " + document.lastModified;
 
   // Select the form
   // Form
@@ -117,6 +122,22 @@ function closeModal(id) {
   // Initialize the form handler
   handleFormSubmission('onlineClassesForm');
 
+const handleSubmit = event => {
+  event.preventDefault();
+
+  const myForm = event.target;
+  const formData = new FormData(myForm);
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  })
+    .then(() => navigate("/thank-you/"))
+    .catch(error => alert(error));
+};
+
+
 
 // Form
 document.addEventListener("DOMContentLoaded", () => {
@@ -139,56 +160,27 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("text-yellow-400");
     }
   });
+});
 
 
 // Form
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form[name='online-classes']");
-  const status = document.getElementById("formStatus");
+// document.addEventListener("DOMContentLoaded", () => {
+//   const form = document.querySelector("form[name='online-classes']");
+//   const status = document.getElementById("formStatus");
 
-  if (!form) return;
+//   if (!form) return;
 
-  form.addEventListener("submit", () => {
-    status.textContent = "Submitting...";
-    status.style.color = "blue";
-  });
-});
+//   form.addEventListener("submit", () => {
+//     status.textContent = "Submitting...";
+//     status.style.color = "blue";
+//   });
+// });
 
 
 /* ===============================
    ONLINE CLASSES FORM HANDLER
    (Netlify-compatible)
 ================================ */
-const handleSubmit = event => {
-  event.preventDefault();
-
-  const myForm = event.target;
-  const formData = new FormData(myForm);
-
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString()
-  })
-    .then(() => navigate("/thank-you/"))
-    .catch(error => alert(error));
-};
-
-return (
-  <form
-    data-netlify="true"
-    name="pizzaOrder"
-    method="post"
-    onSubmit={handleSubmit}
-  >
-    <input type="hidden" name="form-name" value="pizzaOrder" />
-    <label>
-      What order did the pizza give to the pineapple?
-      <input name="order" type="text" onChange={handleChange} />
-    </label>
-    <input type="submit" />
-  </form>
-);
 // const form = document.querySelector("form[data-form='online-classes']");
 
 // if (form) {
@@ -225,8 +217,8 @@ return (
 //             status.textContent = "❌ Something went wrong. Please try again.";
 //             status.className = "text-red-600 mt-4";
 //         }
-    });
-
+//     });
+// }
 
 // form.addEventListener("submit", async (e) => {
 //     e.preventDefault();
@@ -262,32 +254,15 @@ return (
 //   }
 // });
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+// form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+//     const formData = new FormData(form);
+//     const data = Object.fromEntries(formData.entries());
 
-    // Save to localStorage
-    localStorage.setItem("onlineFormData", JSON.stringify(data));
+//     // Save to localStorage
+//     localStorage.setItem("onlineFormData", JSON.stringify(data));
 
-    // Redirect
-    window.location.href = "success.html";
-});
-// Success
-const handleSubmit = event => {
-  event.preventDefault();
-
-  const myForm = event.target;
-  const formData = new FormData(myForm);
-
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString()
-  })
-    .then(() => alert("Thank you for your submission"))
-    .catch(error => alert(error));
-};
-
-document.querySelector("form").addEventListener("submit", handleSubmit);
+//     // Redirect
+//     window.location.href = "success.html";
+// });
